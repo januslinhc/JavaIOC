@@ -8,7 +8,7 @@ public class Manager extends Employee {
 
     @Override
     public String role() {
-        return "com.Employee.com.Employee.Manager";
+        return "Manager";
     }
 
 }

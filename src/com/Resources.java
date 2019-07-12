@@ -14,15 +14,29 @@ public enum Resources {
     INSTANCE;
 
     private Map<String, Controller> controllerMap = new HashMap<>();
-    private Map<String, Service> serviceMap = new HashMap<String, Service>() {{
-        put("com.Name.NameService", new NameServiceB());
-        put("com.Employee.com.Employee.BestManagerService", new BestManagerService());
-        put("com.Employee.com.Employee.BestOfficerService", new BestOfficerService());
-    }};
+    private Map<String, Service> serviceMap = new HashMap<>();
+
+    void addController(Controller controller) {
+        controllerMap.put(controller.getClass().getSimpleName(), controller);
+    }
+
+    void addService(Service service) {
+        addService(service.getClass().getSimpleName(), service);
+    }
+
+    void addService(String key, Service service) {
+        serviceMap.put(key, service);
+    }
 
     Resources() {
-        this.controllerMap.put("com.Name.ControllerA", new ControllerA());
-        this.controllerMap.put("com.Employee.com.Employee.BestEmployeeController", new BestEmployeeController());
+        /// Service List ///
+        addService("NameService", new NameServiceB());
+        addService(new BestManagerService());
+        addService(new BestOfficerService());
+
+        /// Controller List ///
+        addController(new ControllerA());
+        addController(new BestEmployeeController());
     }
 
     public Object getClass(String name) {

@@ -7,6 +7,6 @@ public class Officer extends Employee {
 
     @Override
     public String role() {
-        return "com.Employee.com.Employee.Officer";
+        return "Officer";
     }
 }
