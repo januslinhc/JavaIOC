@@ -1,6 +1,5 @@
 package com;
 
-import com.Controller;
 import com.Employee.BestEmployeeController;
 import com.Employee.BestManagerService;
 import com.Employee.BestOfficerService;
@@ -35,11 +34,16 @@ public enum Resources {
         addService(new BestOfficerService());
 
         /// Controller List ///
+        addController(new MainController());
         addController(new ControllerA());
         addController(new BestEmployeeController());
     }
 
-    public Object getClass(String name) {
-        return controllerMap.get(name).getContoller(serviceMap, controllerMap);
+    public Controller getController(String name) {
+        return controllerMap.get(name).setResource(this);
+    }
+
+    public Service getService(String name) {
+        return serviceMap.get(name);
     }
 }

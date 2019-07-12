@@ -1,14 +1,16 @@
 package com;
 
-import java.util.Map;
-
 public abstract class Controller {
-    protected Map<String, Service> services;
-    protected Map<String, Controller> controllers;
+    private Resources resources;
 
-    Controller getContoller(Map<String, Service> services, Map<String, Controller> controllers) {
-        this.services = services;
-        this.controllers = controllers;
+    Controller setResource(Resources resources) {
+        this.resources = resources;
         return this;
     }
+
+    protected Resources getResources() {
+        return this.resources;
+    }
+
+    protected abstract void run();
 }
