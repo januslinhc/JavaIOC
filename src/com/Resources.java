@@ -14,6 +14,9 @@ public enum Resources {
 
     private Map<String, Controller> controllerMap = new HashMap<>();
     private Map<String, Service> serviceMap = new HashMap<>();
+    private Controller defaultContoller;
+    private Service defaultService;
+
 
     void addController(Controller controller) {
         controllerMap.put(controller.getClass().getSimpleName(), controller);
@@ -28,6 +31,7 @@ public enum Resources {
     }
 
     Resources() {
+        setupDefaultClass();
         /// Service List ///
         addService("NameService", new NameServiceB());
         addService(new BestManagerService());
@@ -39,11 +43,22 @@ public enum Resources {
         addController(new BestEmployeeController());
     }
 
+    private void setupDefaultClass() {
+        defaultContoller = new Controller() {
+            @Override
+            protected void run() {
+            }
+        };
+
+        defaultService = new Service() {
+        };
+    }
+
     public Controller getController(String name) {
-        return controllerMap.get(name).setResource(this);
+        return controllerMap.getOrDefault(name, defaultContoller).setResource(this);
     }
 
     public Service getService(String name) {
-        return serviceMap.get(name);
+        return serviceMap.getOrDefault(name, defaultService);
     }
 }
